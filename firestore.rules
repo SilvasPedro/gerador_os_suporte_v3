@@ -1,0 +1,61 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidRouteNotice(data) {
+      return data.title is string && data.title.size() > 0 && data.title.size() <= 120
+        && data.route is string && data.route.size() > 0 && data.route.size() <= 80
+        && data.status is string && (data.status == 'active' || data.status == 'investigating' || data.status == 'resolved')
+        && data.description is string && data.description.size() <= 1000
+        && (!('author' in data) || (data.author is string && data.author.size() <= 80));
+    }
+
+    function isValidWorkOrder(data) {
+      return data.operatorName is string && data.operatorName.size() > 0 && data.operatorName.size() <= 80
+        && data.scheduleDate is string && data.scheduleDate.size() <= 30
+        && data.period is string && data.period.size() <= 50
+        && data.motive is string && data.motive.size() <= 2000
+        && data.generatedMask is string && data.generatedMask.size() <= 8000;
+    }
+
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Connection test document
+    match /test/{testId} {
+      allow read: if true;
+    }
+
+    // Route Notices: Real-time route info, alerts, and field technician notices
+    match /routeNotices/{noticeId} {
+      allow get: if isValidId(noticeId);
+      allow list: if true;
+      allow create: if isValidId(noticeId) && isValidRouteNotice(incoming());
+      allow update: if isValidId(noticeId) && isValidRouteNotice(incoming());
+      allow delete: if isValidId(noticeId);
+    }
+
+    // Work Orders: Saved records / history
+    match /workOrders/{workOrderId} {
+      allow get: if isValidId(workOrderId);
+      allow list: if true;
+      allow create: if isValidId(workOrderId) && isValidWorkOrder(incoming());
+      allow update: if isValidId(workOrderId) && isValidWorkOrder(incoming());
+      allow delete: if isValidId(workOrderId);
+    }
+  }
+}

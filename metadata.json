@@ -1,0 +1,6 @@
+{
+  "name": "Gerador de O.S - Telecom",
+  "description": "Gerador ágil de máscaras e ordens de serviço para suporte técnico e telecomunicações com sincronização em tempo real.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="telecomGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff1744"/>
+      <stop offset="40%" stop-color="#e4022c"/>
+      <stop offset="100%" stop-color="#990017"/>
+    </linearGradient>
+    <filter id="telecomShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background squircle -->
+  <rect x="32" y="32" width="448" height="448" rx="108" fill="url(#telecomGrad)" filter="url(#telecomShadow)"/>
+
+  <!-- Subtle Radial Glow in center -->
+  <circle cx="256" cy="230" r="140" fill="#ffffff" fill-opacity="0.08"/>
+
+  <!-- Optical Wave / Radio Broadcast Arcs -->
+  <path d="M120 180 C160 130 206 108 256 108 C306 108 352 130 392 180" 
+        stroke="#ffffff" stroke-width="24" stroke-linecap="round" fill="none" stroke-opacity="0.9"/>
+        
+  <path d="M165 225 C192 190 222 174 256 174 C290 174 320 190 347 225" 
+        stroke="#ffffff" stroke-width="24" stroke-linecap="round" fill="none"/>
+
+  <!-- Antenna Mast & Telecom Structure -->
+  <circle cx="256" cy="256" r="32" fill="#ffffff"/>
+  
+  <path d="M256 256 L190 410" stroke="#ffffff" stroke-width="24" stroke-linecap="round"/>
+  <path d="M256 256 L322 410" stroke="#ffffff" stroke-width="24" stroke-linecap="round"/>
+  <path d="M208 345 L304 345" stroke="#ffffff" stroke-width="22" stroke-linecap="round"/>
+
+  <!-- Fiber Optical Beacon Pulse -->
+  <path d="M256 60 L256 104" stroke="#ffeb3b" stroke-width="24" stroke-linecap="round"/>
+
+  <!-- Service Order / Technician Verified Badge -->
+  <circle cx="370" cy="370" r="64" fill="#10b981" stroke="#990017" stroke-width="14"/>
+  <path d="M344 370 L362 388 L396 352" fill="none" stroke="#ffffff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
